@@ -14,6 +14,12 @@
       "items": {
         "$ref": "#/definitions/window"
       }
+    },
+    "_closedWindows": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/window"
+      }
     }
   },
   "required": ["version", "windows"],

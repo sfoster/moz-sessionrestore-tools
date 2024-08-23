@@ -12,7 +12,7 @@ Usage:
 python3 mozlz4a.py -d --pretty ./previous.jsonlz4 output.json
 
 # re-compress a session restore JSON document, ready to copy to a firefox profile directory
-python3 mozlz4a.py -d --pretty ./previous.json output.jsonlz4
+python3 mozlz4a.py -d --pretty ./previous.json sessionstore.jsonlz4
 
 # NB: output is to stdout unless you provide the output argument, so you can redirect to a file or whatever
 ```
