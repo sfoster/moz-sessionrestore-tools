@@ -12,13 +12,13 @@
     "windows": {
       "type": "array",
       "items": {
-        "$ref": "#/definitions/window"
+        "$ref": "#/definitions/openWindow"
       }
     },
     "_closedWindows": {
       "type": "array",
       "items": {
-        "$ref": "#/definitions/window"
+        "$ref": "#/definitions/closedWindow"
       }
     }
   },
@@ -27,21 +27,95 @@
     "window": {
       "type": "object",
       "properties": {
+        "extData": {"type": "object"},
+        "sidebar": {"type": "object"},
+        "selected": {"type": "integer"},
+        "title": {"type": "string"},
         "tabs": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/tab"
           }
         },
-        "selected": {"type": "integer"},
         "_closedTabs": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/closedTab"
           }
+        },
+        "_lastClosedTabGroupCount": {"type": "integer"},
+        "chromeFlags": {"type": "integer"},
+        "height": {"type": "integer"},
+        "screenX": {"type": "integer"},
+        "screenY": {"type": "integer"},
+        "sizemode": {"type": "string", "enum": ["normal", "maximized", "minimized", "fullscreen"]},
+        "sizemodeBeforeMinimized": {"type": "string", "enum": ["normal", "maximized", "minimized", "fullscreen"]},
+        "width": {"type": "integer"},
+        "zIndex": {"type": "integer"},
+        "workspaceID": {
+          "type": ["null", "string"]
         }
       },
       "required": ["tabs"]
+    },
+    "openWindow": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/window"
+        }
+      ],
+      "properties": {
+        "busy": {"type": "boolean"},
+        "tabs": {},
+        "extData": {},
+        "sidebar": {},
+        "_closedTabs": {},
+        "_lastClosedTabGroupCount": {},
+        "chromeFlags": {},
+        "height": {},
+        "screenX": {},
+        "screenY": {},
+        "selected": {},
+        "sizemode": {},
+        "sizemodeBeforeMinimized": {},
+        "title": {},
+        "width": {},
+        "zIndex": {},
+        "workspaceID": {}
+      },
+      "required": [],
+      "additionalProperties": false
+    },
+    "closedWindow": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/window"
+        }
+      ],
+      "properties": {
+        "closedAt": {"type": "integer"},
+        "closedId": {"type": "integer"},
+        "extData": {},
+        "sidebar": {},
+        "tabs": {},
+        "_closedTabs": {},
+        "_lastClosedTabGroupCount": {},
+        "chromeFlags": {},
+        "height": {},
+        "screenX": {},
+        "screenY": {},
+        "selected": {},
+        "sizemode": {},
+        "sizemodeBeforeMinimized": {},
+        "title": {},
+        "width": {},
+        "zIndex": {},
+        "workspaceID": {}
+      },
+      "required": ["closedAt", "closedId"],
+      "additionalProperties": false
     },
     "tab": {
       "type": "object",
@@ -69,6 +143,43 @@
       },
       "required": ["entries", "lastAccessed", "hidden", "userContextId", "index"]
     },
+    "openTab": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/tab"
+        }
+      ],
+      "properties": {
+        "entries": {},
+        "lastAccessed": {},
+        "hidden": {},
+        "searchMode": {},
+        "userContextId": {},
+        "attributes": {},
+        "index": {},
+        "requestedIndex": {},
+        "image": {},
+        "storage": {}
+      }
+    },
+    "closedTab": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/tab"
+        },
+        "permanentKey": {"type": "object"},
+        "title": {"type": "string"},
+        "image": {"type": ["null", "string"]},
+        "pos": {"type": "integer"},
+        "closedAt": {"type": "integer"},
+        "closedId": {"type": "integer"},
+        "sourceWindowId": {"type": "string"}
+      },
+      "additionalProperties": false,
+      "required": ["state", "title", "pos", "closedAt", "sourceWindowId", "closedId"]
+    },
     "entry": {
       "type": "object",
       "properties": {
@@ -89,21 +200,6 @@
         }
       },
       "required": ["url", "title", "persist", "hasUserInteraction"]
-    },
-    "closedTab": {
-      "type": "object",
-      "properties": {
-        "state": {
-          "$ref": "#/definitions/tab"
-        },
-        "title": {"type": "string"},
-        "image": {"type": ["null", "string"]},
-        "pos": {"type": "integer"},
-        "closedAt": {"type": "integer"},
-        "sourceWindowId": {"type": "string"},
-        "closedId": {"type": "integer"}
-      },
-      "required": ["state", "title", "pos", "closedAt", "sourceWindowId", "closedId"]
     }
   }
 }
