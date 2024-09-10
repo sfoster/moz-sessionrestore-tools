@@ -1,17 +1,19 @@
 # moz-sessionrestore-tools
-Tools and prototypes for working with firefox session restore files
+Tools and prototypes for working with Firefox session restore files
 
 ## `mozlz4json.py`
 
-Builds on [mozlz4a.py, by Tilman Blumenbach](https://gist.github.com/kaefer3000/73febe1eec898cd50ce4de1af79a332a) to add a couple of options so you can pretty-print the json output when decompressing. 
+Based on mozlz4a.py, which is copyright Tilman Blumenbach and *not* covered by the MIT license. I built on [this gist](https://gist.github.com/kaefer3000/73febe1eec898cd50ce4de1af79a332a), but what looks like the same file is also housed at https://github.com/baillow/mozlz4, where it is given what looks like BSD-2 license. My fork adds a couple of options so you can pretty-print the json output when decompressing. 
 
-Usage:
+Session restore files are created in your Firefox profile directory. You'll want to enable `Open previous windows and tabs` in about:preferences. The primary restore file is `sessionstore.jsonlz4`, and we take snapshots for backup/rollback in the `sessionstore-backups/` sub-directory. 
+
+#### Usage:
 
 ```
-# decompress a session restore file
+# To decompress a session restore file
 python3 mozlz4a.py -d --pretty ./previous.jsonlz4 output.json
 
-# re-compress a session restore JSON document, ready to copy to a firefox profile directory
+# To re-compress a session restore JSON document, ready to copy to a firefox profile directory
 python3 mozlz4a.py -d --pretty ./previous.json sessionstore.jsonlz4
 
 # NB: output is to stdout unless you provide the output argument, so you can redirect to a file or whatever
@@ -21,7 +23,7 @@ python3 mozlz4a.py -d --pretty ./previous.json sessionstore.jsonlz4
 
 Validate a de-compressed session restore file against a JSON Schema
 
-Usage:
+#### Usage:
 
 ```
 # Using the default schema, which is provided alongside validate.py as session-schema.json
