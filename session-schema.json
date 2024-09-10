@@ -66,6 +66,7 @@
         }
       ],
       "properties": {
+        "__lastSessionWindowID": {"type": "string"},
         "busy": {"type": "boolean"},
         "tabs": {},
         "extData": {},
@@ -85,7 +86,7 @@
         "workspaceID": {}
       },
       "required": [],
-      "additionalProperties": false
+      "additionalProperties": true
     },
     "closedWindow": {
       "type": "object",
@@ -126,6 +127,7 @@
             "$ref": "#/definitions/entry"
           }
         },
+        "removeAfterRestore": {"type": "boolean"},
         "lastAccessed": {"type": "integer"},
         "hidden": {"type": "boolean"},
         "searchMode": {"type": "null"},
@@ -152,6 +154,7 @@
       ],
       "properties": {
         "entries": {},
+        "removeAfterRestore": {},
         "lastAccessed": {},
         "hidden": {},
         "searchMode": {},
@@ -161,7 +164,8 @@
         "requestedIndex": {},
         "image": {},
         "storage": {}
-      }
+      },
+      "additionalProperties": false
     },
     "closedTab": {
       "type": "object",
@@ -169,6 +173,8 @@
         "state": {
           "$ref": "#/definitions/tab"
         },
+        "closedInGroup": {"type": "boolean"},
+        "removeAfterRestore": {},
         "permanentKey": {"type": "object"},
         "title": {"type": "string"},
         "image": {"type": ["null", "string"]},
@@ -185,13 +191,37 @@
       "properties": {
         "url": {"type": "string"},
         "title": {"type": "string"},
+        "subframe": {"type": "boolean"},
         "persist": {"type": "boolean"},
         "principalToInherit_base64": {"type": "string"},
+        "scrollRestorationIsManual": {"type": "boolean"},
         "hasUserInteraction": {"type": "boolean"},
         "triggeringPrincipal_base64": {"type": "string"},
         "resultPrincipalURI": {
           "type": ["null", "string"]
         },
+        "scroll": {"type": "string"},
+        "presState": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/presStateItem"
+          }
+        },
+        "loadReplace": {"type": "boolean"},
+        "loadReplace2": {"type": "boolean"},
+        "csp": {"type": "string"},
+        "contentType": {"type": "string"},
+        "cacheKey": {"type": "integer"},
+        "ID": {"type": "integer"},
+        "srcdocData": {"type": "string"},
+        "isSrcdocEntry": {"type": "boolean"},
+        "baseURI": {"type": "string"},
+        "docIdentifier": {"type": "integer"},
+        "structuredCloneState": {"type": "string"},
+        "structuredCloneVersion": {"type": "integer"},
+        "docshellUUID": {"type": "string"},
+        "referrerInfo": {"type": "string"},
+        "originalURI": {"type": "string"},
         "children": {
           "type": "array",
           "items": {
@@ -199,7 +229,15 @@
           }
         }
       },
+      "additionalProperties": false,
       "required": ["url", "title", "persist", "hasUserInteraction"]
+    },
+    "presStateItem": {
+      "type": "object",
+      "properties": {
+        "stateKey": {"type": "string"},
+        "scroll": {"type": "string"}
+      }
     }
   }
 }
