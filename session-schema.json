@@ -187,7 +187,7 @@
         "pos": {"type": "integer"},
         "closedAt": {"type": "integer"},
         "closedId": {"type": "integer"},
-        "sourceWindowId": {"type": "string"}
+        "sourceWindowId": {"type": ["string", "integer"]}
       },
       "additionalProperties": false,
       "required": ["state", "title", "pos", "closedAt", "sourceWindowId", "closedId"]
