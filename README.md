@@ -7,6 +7,8 @@ Based on mozlz4a.py, which is copyright Tilman Blumenbach and *not* covered by t
 
 Session restore files are created in your Firefox profile directory. You'll want to enable `Open previous windows and tabs` in about:preferences. The primary restore file is `sessionstore.jsonlz4`, and we take snapshots for backup/rollback in the `sessionstore-backups/` sub-directory. 
 
+**Note: this requires the lz4 package which you can install with `pip3 install lz4`**
+
 #### Usage:
 
 ```
