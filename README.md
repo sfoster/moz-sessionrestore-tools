@@ -11,17 +11,19 @@ Session restore files are created in your Firefox profile directory. You'll want
 
 ```
 # To decompress a session restore file
-python3 mozlz4a.py -d --pretty ./previous.jsonlz4 output.json
+python3 mozlz4json.py -d --pretty ./previous.jsonlz4 output.json
 
 # To re-compress a session restore JSON document, ready to copy to a firefox profile directory
-python3 mozlz4a.py -d --pretty ./previous.json sessionstore.jsonlz4
+python3 mozlz4json.py -d --pretty ./previous.json sessionstore.jsonlz4
 
 # NB: output is to stdout unless you provide the output argument, so you can redirect to a file or whatever
 ```
 
 ## `validate.py`
 
-Validate a de-compressed session restore file against a JSON Schema
+Validate a session restore file against a JSON Schema.
+
+**You must decompress the session file to "normal" JSON before validating it.**
 
 #### Usage:
 
