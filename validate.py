@@ -39,7 +39,11 @@ parsed_args = argparser.parse_args()
 schema = load_json(parsed_args.schema)
 
 # Load JSON document
-json_data = load_json(parsed_args.in_file)
+try:
+    json_data = load_json(parsed_args.in_file)
+except UnicodeDecodeError as ex:
+    print("This file doesn't appear to be JSON; did you un-lz4 the file first?")
+    exit(1)
 
 # Validate the JSON data
 if is_valid_json(json_data, schema):
